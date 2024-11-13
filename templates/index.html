@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Final Exam Score</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        .form-group label {
+            font-weight: 600;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+        }
+        .btn-secondary {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predict Final Exam Score</h1>
+        <form id="predictionForm" action="/predict" method="POST">
+            <div class="form-group">
+                <label for="study_hours_per_week">Study Hours per Week:</label>
+                <input type="number" id="study_hours_per_week" name="study_hours_per_week" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="attendance_rate">Attendance Rate (%):</label>
+                <input type="number" id="attendance_rate" name="attendance_rate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="previous_exam_scores">Previous Exam Scores:</label>
+                <input type="number" id="previous_exam_scores" name="previous_exam_scores" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="assignments_completed">Assignments Completed:</label>
+                <input type="number" id="assignments_completed" name="assignments_completed" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="extracurricular_participation">Extracurricular Participation:</label>
+                <input type="number" id="extracurricular_participation" name="extracurricular_participation" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+            <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <p>Predicted Final Exam Score: {{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function clearForm() {
+            document.getElementById("predictionForm").reset();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
